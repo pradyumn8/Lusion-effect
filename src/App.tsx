@@ -1,15 +1,30 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "motion/react"
 import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import Header from "@/components/ui/header"
 import ScrollVideoReveal from "@/components/ui/scroll-video-reveal"
-import desktopVideo from "@/assets/desktop.mp4"
+import VideoPlayer from "@/components/ui/video-player"
+import desktopVideo from "@/assets/ebr desk.mp4"
+import mobileVideo from "@/assets/ebr mob.mp4"
 
 const BRAND_BLUE = "#1d3afe"
 
 function App() {
+  const [playerOpen, setPlayerOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)")
+    const update = () => setIsMobile(mql.matches)
+    update()
+    mql.addEventListener("change", update)
+    return () => mql.removeEventListener("change", update)
+  }, [])
+
+  const videoSrc = isMobile ? mobileVideo : desktopVideo
+
   return (
     <main className="relative w-full bg-[#f3f1ff]">
       <Header />
@@ -18,12 +33,13 @@ function App() {
         <Hero />
 
         <ScrollVideoReveal
-          src={desktopVideo}
+          src={videoSrc}
           className="md:-mt-[25rem]"
           revealOverlay={
             <button
               type="button"
               aria-label="Play reel"
+              onClick={() => setPlayerOpen(true)}
               className="group flex cursor-pointer items-center gap-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)] md:gap-8"
             >
               <span className="hidden font-aeonik font-light leading-none tracking-tight text-[clamp(56px,10vw,160px)] md:inline-block">
@@ -56,6 +72,12 @@ function App() {
           </span>
         </ScrollVideoReveal>
       </div>
+
+      <VideoPlayer
+        src={videoSrc}
+        open={playerOpen}
+        onClose={() => setPlayerOpen(false)}
+      />
     </main>
   )
 }
