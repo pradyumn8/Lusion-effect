@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useSpring, useTransform } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -13,6 +13,8 @@ type ScrollVideoRevealProps = {
   className?: string
   /** Optional overlay content rendered above the video (e.g. a heading). */
   children?: React.ReactNode
+  /** Centered overlay that fades in once the video reveal is complete. */
+  revealOverlay?: React.ReactNode
 }
 
 type Point = [number, number]
@@ -126,8 +128,18 @@ export default function ScrollVideoReveal({
   scrollHeightVh = 150,
   className,
   children,
+  revealOverlay,
 }: ScrollVideoRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)")
+    const update = () => setIsMobile(mql.matches)
+    update()
+    mql.addEventListener("change", update)
+    return () => mql.removeEventListener("change", update)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -147,13 +159,42 @@ export default function ScrollVideoReveal({
     paths
   )
 
+  const childrenOpacity = useTransform(progress, [0.55, 0.8], [1, 0])
+  const overlayOpacity = useTransform(progress, [0.85, 1], [0, 1])
+  const overlayScale = useTransform(progress, [0.85, 1], [0.92, 1])
+
+  if (isMobile) {
+    return (
+      <section className={cn("relative w-full px-4", className)}>
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl">
+          <video
+            className="h-full w-full object-cover"
+            src={src}
+            poster={poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
+          <div className="absolute inset-0 bg-black/15" />
+          {revealOverlay ? (
+            <div className="absolute inset-0 flex items-center justify-center px-6">
+              {revealOverlay}
+            </div>
+          ) : null}
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section
       ref={ref}
       className={cn("relative w-full", className)}
       style={{ height: `${scrollHeightVh}vh` }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="pointer-events-none sticky top-0 h-screen w-full overflow-hidden">
         {/* SVG defines the clip-path. objectBoundingBox keeps coords in 0..1
             so the path scales with whatever it is applied to. */}
         <svg
@@ -188,9 +229,21 @@ export default function ScrollVideoReveal({
         </div>
 
         {children ? (
-          <div className="pointer-events-none absolute inset-0 flex items-end justify-between p-8 md:p-14">
+          <motion.div
+            style={{ opacity: childrenOpacity }}
+            className="pointer-events-none absolute inset-0 flex items-end justify-between p-8 md:p-14"
+          >
             {children}
-          </div>
+          </motion.div>
+        ) : null}
+
+        {revealOverlay ? (
+          <motion.div
+            style={{ opacity: overlayOpacity, scale: overlayScale }}
+            className="pointer-events-none absolute inset-0 flex items-center justify-center px-6"
+          >
+            <div className="pointer-events-auto">{revealOverlay}</div>
+          </motion.div>
         ) : null}
       </div>
     </section>
