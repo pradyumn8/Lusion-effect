@@ -38,15 +38,10 @@ export default function Stats() {
   const inView = useInView(ref, { once: true, margin: "-15%" })
 
   return (
-    <section className="px-6 py-20 md:px-12 md:py-32">
-      <div className="mb-12 flex items-center gap-3 md:mb-20">
-        <span aria-hidden className="block h-3 w-3 bg-[#350B6A]" />
-        <span className="text-eyebrow text-black/70">Stats &amp; Facts</span>
-      </div>
-
+    <section className="px-6 py-10 md:px-8 md:py-16">
       <div
         ref={ref}
-        className="grid grid-cols-2 gap-y-12 md:grid-cols-4 md:gap-y-0"
+        className="grid grid-cols-2 gap-y-12 md:flex md:flex-row md:justify-between md:gap-y-0"
       >
         {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col gap-3">

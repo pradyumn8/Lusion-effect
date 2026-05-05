@@ -6,22 +6,41 @@ import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import MenuButton from "@/components/ui/menu-button"
-import logo from "@/assets/Artboard.svg"
+import logo from "@/assets/Logo.svg"
+import logoWhite from "@/assets/logo-white.svg"
 
-const BRAND_BLUE = "#1d3afe"
+const BRAND = "#6B00F6"
 
 export default function Header({
   onMenuOpenChange,
 }: {
   onMenuOpenChange?: (open: boolean) => void
 }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const handleOpenChange = (next: boolean) => {
+    setMenuOpen(next)
+    onMenuOpenChange?.(next)
+  }
+
   return (
     <header className="fixed inset-x-0 2xl:inset-x-[10%] top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
       <a href="#home" className="inline-flex items-center leading-none">
         <img
+          src={logoWhite}
+          alt="EBR"
+          className={cn(
+            "h-10 w-auto md:hidden",
+            menuOpen ? "block" : "hidden"
+          )}
+        />
+        <img
           src={logo}
           alt="EBR"
-          className="h-12 w-auto md:h-16"
+          className={cn(
+            "h-10 w-auto md:h-10 md:block",
+            menuOpen ? "hidden md:block" : "block"
+          )}
         />
       </a>
 
@@ -29,7 +48,7 @@ export default function Header({
         <div className="hidden md:block">
           <LetsTalkPill />
         </div>
-        <MenuButton onOpenChange={onMenuOpenChange} />
+        <MenuButton onOpenChange={handleOpenChange} />
       </div>
     </header>
   )
@@ -51,7 +70,7 @@ function LetsTalkPill() {
         "transition-colors duration-[400ms]",
         "outline-none focus:outline-none focus-visible:outline-none"
       )}
-      style={{ backgroundColor: hovered ? BRAND_BLUE : "#0f0d17" }}
+      style={{ backgroundColor: hovered ? BRAND : "#0f0d17" }}
     >
       {/* Arrow that grows in from the left on hover */}
       <motion.span

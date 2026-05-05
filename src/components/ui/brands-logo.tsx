@@ -11,7 +11,7 @@ const loop = [...logos, ...logos]
 
 export default function BrandsLogo() {
   return (
-    <section className="bg-[#210F36] py-16 md:py-24">
+    <section className="bg-[#6B00F6] py-20 md:py-28">
       <div
         className="relative overflow-hidden"
         style={{

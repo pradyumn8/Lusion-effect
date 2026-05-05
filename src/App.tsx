@@ -11,7 +11,7 @@ import VideoPlayer from "@/components/ui/video-player"
 import desktopVideo from "@/assets/ebr desk.mp4"
 import mobileVideo from "@/assets/ebr mob.mp4"
 
-const BRAND_BLUE = "#1d3afe"
+const BRAND = "#6B00F6"
 
 function App() {
   const [playerOpen, setPlayerOpen] = useState(false)
@@ -32,12 +32,19 @@ function App() {
     <main
       className={cn(
         "relative w-full transition-colors duration-300",
-        menuOpen ? "bg-[#350B6A] md:bg-[#f3f1ff]" : "bg-[#f3f1ff]"
+        menuOpen
+          ? "min-h-svh bg-[#6B00F6] md:min-h-0 md:bg-[#f3f1ff]"
+          : "bg-[#f3f1ff]"
       )}
     >
       <Header onMenuOpenChange={setMenuOpen} />
 
-      <div className="mx-auto w-full 2xl:w-[80%]">
+      <div
+        className={cn(
+          "mx-auto w-full 2xl:w-[80%]",
+          menuOpen && "hidden md:block"
+        )}
+      >
         <Hero />
 
         <ScrollVideoReveal
@@ -53,7 +60,7 @@ function App() {
               <span className="relative grid place-items-center overflow-hidden rounded-full bg-white/95 px-6 py-3 ring-1 ring-white/40 md:px-10 md:py-5">
                 <span
                   aria-hidden
-                  className="absolute inset-0 translate-y-full bg-blue-600 transition-transform duration-500 ease-out group-hover:translate-y-0"
+                  className="absolute inset-0 translate-y-full bg-[#6B00F6] transition-transform duration-500 ease-out group-hover:translate-y-0"
                 />
                 <svg
                   aria-hidden
@@ -66,12 +73,12 @@ function App() {
             </button>
           }
         >
-          <h2 className="text-h1 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)]">
+          {/* <h2 className="text-h1 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)]">
             Scroll to reveal.
           </h2>
           <span className="text-eyebrow text-white/80">
             ↓ keep going
-          </span>
+          </span> */}
         </ScrollVideoReveal>
 
         <Stats />
@@ -133,7 +140,7 @@ function OurApproachPill() {
         "outline-none focus:outline-none focus-visible:outline-none"
       )}
       style={{
-        backgroundColor: hovered ? BRAND_BLUE : "#ffffff",
+        backgroundColor: hovered ? BRAND : "#ffffff",
         color: hovered ? "#ffffff" : "#000000",
       }}
     >
