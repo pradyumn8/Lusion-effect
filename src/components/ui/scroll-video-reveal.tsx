@@ -119,7 +119,7 @@ const paths = [
   buildPath(S3, 0.05),
   buildPath(S4, 0.05),
   buildPath(S5, 0.03),
-  buildPath(S6, 0.00),
+  buildPath(S6, 0.03),
 ];
 
 export default function ScrollVideoReveal({

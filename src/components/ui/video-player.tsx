@@ -154,7 +154,7 @@ export default function VideoPlayer({ src, open, onClose }: VideoPlayerProps) {
             <button
               type="button"
               onClick={togglePlay}
-              className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm "
+              className="text-eyebrow"
             >
               {isPlaying ? "Pause" : "Play"}
             </button>
@@ -169,7 +169,7 @@ export default function VideoPlayer({ src, open, onClose }: VideoPlayerProps) {
             <button
               type="button"
               onClick={toggleMute}
-              className="text-xs font-medium uppercase tracking-[0.2em] md:text-sm "
+              className="text-eyebrow"
             >
               {isMuted ? "Unmute" : "Mute"}
             </button>

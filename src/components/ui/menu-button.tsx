@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowUpRight, ArrowRight, MessageSquare } from "lucide-react"
 
@@ -24,14 +24,20 @@ export default function MenuButton({
   items = defaultItems,
   labsHref = "#labs",
   className,
+  onOpenChange,
 }: {
   items?: MenuItem[]
   labsHref?: string
   className?: string
+  onOpenChange?: (open: boolean) => void
 }) {
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState<string | null>(null)
   const [labsHovered, setLabsHovered] = useState(false)
+
+  useEffect(() => {
+    onOpenChange?.(open)
+  }, [open, onOpenChange])
 
   return (
     <div className={cn("relative inline-block", className)}>
@@ -149,7 +155,7 @@ export default function MenuButton({
                         <TextRoll
                           hovered={isHovered}
                           className={cn(
-                            "relative z-10 font-aeonik text-[26px] font-light tracking-[0.02em] uppercase leading-[1.4] text-black"
+                            "relative z-10 text-[26px] font-normal tracking-[0.02em] uppercase leading-[1.4] text-black"
                           )}
                         >
                           {item.name}
@@ -205,7 +211,7 @@ export default function MenuButton({
               }}
               className="group flex origin-top-right items-center justify-between overflow-hidden rounded-[0.625em] bg-white px-[1.875em] py-[1.75em] text-black shadow-[0_20px_50px_-15px_rgba(15,13,23,0.35)] ring-1 ring-black/5 md:hidden"
             >
-              <span className="font-aeonik text-[26px] font-light tracking-[0.02em] uppercase leading-none text-black">
+              <span className="text-[26px] font-normal tracking-[0.02em] uppercase leading-none text-black">
                 LET'S TALK
               </span>
               <MessageSquare className="h-[18px] w-[18px] text-black" strokeWidth={2} />
@@ -232,7 +238,7 @@ export default function MenuButton({
                 <LabsIcon className="h-[28px] w-[28px]" />
                 <TextRoll
                   hovered={labsHovered}
-                  className="text-[26px] font-light tracking-[0.12em] uppercase leading-none text-white"
+                  className="text-[26px] font-normal tracking-[0.12em] uppercase leading-none text-white"
                 >
                   LABS
                 </TextRoll>

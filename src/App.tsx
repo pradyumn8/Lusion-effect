@@ -3,8 +3,10 @@ import { motion } from "motion/react"
 import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import BrandsLogo from "@/components/ui/brands-logo"
 import Header from "@/components/ui/header"
 import ScrollVideoReveal from "@/components/ui/scroll-video-reveal"
+import Stats from "@/components/ui/stats"
 import VideoPlayer from "@/components/ui/video-player"
 import desktopVideo from "@/assets/ebr desk.mp4"
 import mobileVideo from "@/assets/ebr mob.mp4"
@@ -13,6 +15,7 @@ const BRAND_BLUE = "#1d3afe"
 
 function App() {
   const [playerOpen, setPlayerOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -26,8 +29,13 @@ function App() {
   const videoSrc = isMobile ? mobileVideo : desktopVideo
 
   return (
-    <main className="relative w-full bg-[#f3f1ff]">
-      <Header />
+    <main
+      className={cn(
+        "relative w-full transition-colors duration-300",
+        menuOpen ? "bg-[#350B6A] md:bg-[#f3f1ff]" : "bg-[#f3f1ff]"
+      )}
+    >
+      <Header onMenuOpenChange={setMenuOpen} />
 
       <div className="mx-auto w-full 2xl:w-[80%]">
         <Hero />
@@ -42,9 +50,6 @@ function App() {
               onClick={() => setPlayerOpen(true)}
               className="group flex cursor-pointer items-center gap-4 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)] md:gap-8"
             >
-              <span className="hidden font-aeonik font-light leading-none tracking-tight text-[clamp(56px,10vw,160px)] md:inline-block">
-                PLAY
-              </span>
               <span className="relative grid place-items-center overflow-hidden rounded-full bg-white/95 px-6 py-3 ring-1 ring-white/40 md:px-10 md:py-5">
                 <span
                   aria-hidden
@@ -58,19 +63,20 @@ function App() {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
-              <span className="hidden font-aeonik font-light leading-none tracking-tight text-[clamp(56px,10vw,160px)] md:inline-block">
-                REEL
-              </span>
             </button>
           }
         >
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)]">
+          <h2 className="text-h1 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.45)]">
             Scroll to reveal.
           </h2>
-          <span className="text-sm md:text-base font-medium uppercase tracking-[0.2em] text-white/80">
+          <span className="text-eyebrow text-white/80">
             ↓ keep going
           </span>
         </ScrollVideoReveal>
+
+        <Stats />
+
+        <BrandsLogo />
       </div>
 
       <VideoPlayer
@@ -87,7 +93,7 @@ export default App
 function Hero() {
   return (
     <section className="relative px-6 pt-32 pb-16 md:px-12 md:pt-40 md:pb-24">
-      <h1 className="font-aeonik font-light tracking-[-0.02em] text-black leading-[0.9] text-[clamp(56px,11vw,200px)]">
+      <h1 className="text-display text-black">
         Bold Ideas,
         <br />
         Brought to Life
@@ -98,7 +104,7 @@ function Hero() {
 
         </div>
         <div className="max-w-[42em]">
-          <p className="font-aeonik text-base leading-[1.6] text-black/80 md:text-lg">
+          <p className="text-body-lg text-black/80">
             We combine design, motion, 3D, and development to create digital
             experiences that feel visually striking and technically seamless.
             From campaign launches to immersive brand worlds, we build work

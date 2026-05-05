@@ -32,20 +32,18 @@ const Card: FC<iCardProps> = ({
           shadow-md pr-3 pl-3 pt-3 pb-4 overflow-hidden rounded-md"
         style={{ backgroundColor: color }}
       >
-        <span className="font-bold relative text-5xl md:text-7xl mt-5">
-          <span
-            className="relative z-10 font-black tracking-tight"
-            style={{ color: textColor }}
-          >
-            {title}
-          </span>
-        </span>
-        <div
-          className="text-lg md:text-2xl font-medium text-center mb-0 z-10 mt-2 lowercase tracking-wide relative"
-          style={{ lineHeight: 1.4, color: textColor }}
+        <h3
+          className="text-h1 relative z-10 mt-5"
+          style={{ color: textColor }}
+        >
+          {title}
+        </h3>
+        <p
+          className="text-body-lg relative z-10 mt-2 text-center lowercase"
+          style={{ color: textColor }}
         >
           {description}
-        </div>
+        </p>
         <div className="absolute inset-0 z-0">
           <img
             className="w-full h-full object-cover"

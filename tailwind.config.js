@@ -5,8 +5,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        aeonik: [
-          "Aeonik",
+        hoves: [
+          "TT Hoves Pro",
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
+        sans: [
+          "TT Hoves Pro",
           "Inter",
           "ui-sans-serif",
           "system-ui",

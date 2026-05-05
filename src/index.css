@@ -3,19 +3,17 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Aeonik";
-  src: url("./assets/fonnts.com-4556/fonts/fonnts.com-Aeonik-Regular.ttf")
-    format("truetype");
+  font-family: "TT Hoves Pro";
+  src: url("./assets/TT_Hoves_Pro_Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Aeonik";
-  src: url("./assets/fonnts.com-4556/fonts/fonnts.com-Aeonik-Bold.ttf")
-    format("truetype");
-  font-weight: 700;
+  font-family: "TT Hoves Pro";
+  src: url("./assets/TT_Hoves_Pro_Medium.ttf") format("truetype");
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -26,4 +24,70 @@ body,
   margin: 0;
   padding: 0;
   min-height: 100svh;
+}
+
+/* TT Hoves Pro is the only typeface — Regular (400) for body, Medium (500)
+   for headings. Use the typography presets below for consistent type. */
+html {
+  font-family: "TT Hoves Pro", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+}
+
+@layer components {
+  /* ======================================================================
+     TYPOGRAPHY STYLE GUIDE
+     ----------------------------------------------------------------------
+     Headings → TT Hoves Pro Medium (500)
+     Body     → TT Hoves Pro Regular (400)
+
+     Use these presets for any new heading / paragraph so type stays
+     consistent across the site. Color is intentionally not set — pair
+     with `text-black`, `text-white/70`, etc. as needed.
+     ====================================================================== */
+
+  /* Display — hero headline, used once per page */
+  .text-display {
+    @apply font-medium leading-[0.9] tracking-[-0.02em];
+    font-size: clamp(56px, 11vw, 200px);
+  }
+
+  /* Section H1 */
+  .text-h1 {
+    @apply font-medium leading-[1] tracking-[-0.015em];
+    font-size: clamp(40px, 6vw, 80px);
+  }
+
+  /* Sub-section H2 */
+  .text-h2 {
+    @apply font-medium leading-[1.1] tracking-[-0.01em];
+    font-size: clamp(28px, 4vw, 48px);
+  }
+
+  /* H3 — small headings, card titles */
+  .text-h3 {
+    @apply font-medium leading-[1.2];
+    font-size: clamp(20px, 2.2vw, 28px);
+  }
+
+  /* Lead paragraph — sits beneath display / H1 */
+  .text-body-lg {
+    @apply font-normal leading-[1.6];
+    font-size: clamp(16px, 1.1vw, 18px);
+  }
+
+  /* Default paragraph */
+  .text-body {
+    @apply font-normal leading-[1.55] text-[15px];
+  }
+
+  /* Caption / fine print */
+  .text-body-sm {
+    @apply font-normal leading-[1.5] text-[13px];
+  }
+
+  /* Uppercase eyebrow / label */
+  .text-eyebrow {
+    @apply font-medium uppercase tracking-[0.2em];
+    font-size: clamp(12px, 0.85vw, 14px);
+  }
 }

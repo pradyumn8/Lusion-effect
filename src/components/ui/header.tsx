@@ -6,24 +6,30 @@ import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import MenuButton from "@/components/ui/menu-button"
+import logo from "@/assets/Artboard.svg"
 
 const BRAND_BLUE = "#1d3afe"
 
-export default function Header() {
+export default function Header({
+  onMenuOpenChange,
+}: {
+  onMenuOpenChange?: (open: boolean) => void
+}) {
   return (
     <header className="fixed inset-x-0 2xl:inset-x-[10%] top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
-      <a
-        href="#home"
-        className="text-[clamp(1.25rem,1.4vw,1.75rem)] font-black tracking-[0.02em] text-black leading-none"
-      >
-        EBR
+      <a href="#home" className="inline-flex items-center leading-none">
+        <img
+          src={logo}
+          alt="EBR"
+          className="h-12 w-auto md:h-16"
+        />
       </a>
 
       <div className="flex items-center gap-2.5">
         <div className="hidden md:block">
           <LetsTalkPill />
         </div>
-        <MenuButton />
+        <MenuButton onOpenChange={onMenuOpenChange} />
       </div>
     </header>
   )
