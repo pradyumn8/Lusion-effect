@@ -19,7 +19,7 @@ function App() {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)")
+    const mql = window.matchMedia("(max-width: 1023px)")
     const update = () => setIsMobile(mql.matches)
     update()
     mql.addEventListener("change", update)
@@ -41,7 +41,7 @@ function App() {
 
       <div
         className={cn(
-          "mx-auto w-full 2xl:w-[90%]",
+          "mx-auto w-full md:w-[90%] xl:w-full 2xl:w-[90%]",
           menuOpen && "hidden md:block"
         )}
       >
@@ -49,7 +49,7 @@ function App() {
 
         <ScrollVideoReveal
           src={videoSrc}
-          className="md:-mt-[25rem]"
+          className="lg:-mt-[25rem]"
           revealOverlay={
             <button
               type="button"
@@ -99,7 +99,7 @@ export default App
 
 function Hero() {
   return (
-    <section className="relative px-4 pt-32 pb-16 md:px-10 md:pt-40 md:pb-24">
+    <section className="relative px-4 md:px-12 pt-32 pb-16 md:pt-40 md:pb-24">
       <h1 className="text-display text-black -ml-1 md:-ml-2">
         Bold Ideas,
         <br />
@@ -154,7 +154,7 @@ function OurApproachPill() {
         }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className="flex items-center overflow-hidden"
-      > 
+      >
         <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2.25} />
       </motion.span>
 

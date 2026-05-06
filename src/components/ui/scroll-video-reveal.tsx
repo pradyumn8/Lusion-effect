@@ -134,7 +134,7 @@ export default function ScrollVideoReveal({
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)")
+    const mql = window.matchMedia("(max-width: 1023px)")
     const update = () => setIsMobile(mql.matches)
     update()
     mql.addEventListener("change", update)
