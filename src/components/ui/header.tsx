@@ -24,7 +24,7 @@ export default function Header({
   }
 
   return (
-    <header className="fixed inset-x-0 2xl:inset-x-[10%] top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
+    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-5 md:px-10">
       <a href="#home" className="inline-flex items-center leading-none">
         <img
           src={logoWhite}
