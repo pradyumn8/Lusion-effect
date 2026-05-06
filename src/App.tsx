@@ -41,7 +41,11 @@ function App() {
 
       <div
         className={cn(
+<<<<<<< HEAD
           "mx-auto w-full 2xl:w-[90%]",
+=======
+          "mx-auto w-full",
+>>>>>>> e21c22de69b06291565e2cd5bfc34e605d6d43de
           menuOpen && "hidden md:block"
         )}
       >
@@ -99,8 +103,13 @@ export default App
 
 function Hero() {
   return (
+<<<<<<< HEAD
     <section className="relative px-6 pt-32 pb-16 md:px-10 md:pt-40 md:pb-24">
       <h1 className="text-display text-black">
+=======
+    <section className="relative px-4 pt-32 pb-16 md:px-10 md:pt-40 md:pb-24">
+      <h1 className="text-display text-black -ml-1 md:-ml-2">
+>>>>>>> e21c22de69b06291565e2cd5bfc34e605d6d43de
         Bold Ideas,
         <br />
         Brought to Life
