@@ -163,10 +163,6 @@ export default function ScrollVideoReveal({
   const overlayOpacity = useTransform(progress, [0.85, 1], [0, 1])
   const overlayScale = useTransform(progress, [0.85, 1], [0.92, 1])
 
-  // Align the clip container's left edge with the hero's md:px-10 (40px) at the
-  // start of the reveal, then ease to 0 as the path expands to full-bleed (S5/S6).
-  const clipLeft = useTransform(progress, [0, 0.6, 1], [40, 40, 0])
-
   if (isMobile) {
     return (
       <section className={cn("relative w-full px-4", className)}>
