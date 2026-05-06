@@ -41,7 +41,7 @@ function App() {
 
       <div
         className={cn(
-          "mx-auto w-full 2xl:w-[80%]",
+          "mx-auto w-full 2xl:w-[90%]",
           menuOpen && "hidden md:block"
         )}
       >
@@ -99,7 +99,7 @@ export default App
 
 function Hero() {
   return (
-    <section className="relative px-6 pt-32 pb-16 md:px-12 md:pt-40 md:pb-24">
+    <section className="relative px-6 pt-32 pb-16 md:px-10 md:pt-40 md:pb-24">
       <h1 className="text-display text-black">
         Bold Ideas,
         <br />

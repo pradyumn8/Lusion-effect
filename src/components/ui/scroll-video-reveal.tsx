@@ -66,39 +66,39 @@ function buildPath(c: ShapeDef, r: number) {
 }
 
 const S1: ShapeDef = {
-  tl: [0.05, 0.2], tr: [0.45, 0.2], br: [0.45, 0.8], bl: [0.05, 0.8],
+  tl: [0.04, 0.2], tr: [0.45, 0.2], br: [0.45, 0.8], bl: [0.04, 0.8],
   tc1: [0.18, 0.2], tc2: [0.32, 0.2],
   rc1: [0.45, 0.4], rc2: [0.45, 0.6],
   bc1: [0.32, 0.8], bc2: [0.18, 0.8],
-  lc1: [0.05, 0.6], lc2: [0.05, 0.4]
+  lc1: [0.04, 0.6], lc2: [0.04, 0.4]
 };
 
 const S2: ShapeDef = {
-  tl: [0.05, 0.2], tr: [0.7, 0.2], br: [0.45, 0.8], bl: [0.05, 0.8],
+  tl: [0.04, 0.2], tr: [0.7, 0.2], br: [0.45, 0.8], bl: [0.04, 0.8],
   tc1: [0.26, 0.2], tc2: [0.48, 0.2],
   rc1: [0.35, 0.4], rc2: [0.35, 0.6],
   bc1: [0.31, 0.8], bc2: [0.18, 0.8],
-  lc1: [0.05, 0.6], lc2: [0.05, 0.4]
+  lc1: [0.04, 0.6], lc2: [0.04, 0.4]
 };
 
 const S3: ShapeDef = {
-  tl: [0.05, 0.2], tr: [0.95, 0.15], br: [0.4, 0.8], bl: [0.05, 0.8],
+  tl: [0.04, 0.2], tr: [0.97, 0.15], br: [0.4, 0.8], bl: [0.04, 0.8],
   tc1: [0.35, 0.18], tc2: [0.65, 0.16],
   rc1: [0.25, 0.4], rc2: [0.25, 0.6],
   bc1: [0.28, 0.8], bc2: [0.16, 0.8],
-  lc1: [0.05, 0.6], lc2: [0.05, 0.4]
+  lc1: [0.04, 0.6], lc2: [0.04, 0.4]
 };
 
 const S4: ShapeDef = {
-  tl: [0.1, 0.15], tr: [0.9, 0.1], br: [0.85, 0.8], bl: [0.15, 0.85],
+  tl: [0.04, 0.15], tr: [0.9, 0.1], br: [0.85, 0.8], bl: [0.04, 0.85],
   tc1: [0.4, 0.35], tc2: [0.6, 0.35],
   rc1: [0.55, 0.4], rc2: [0.55, 0.6],
   bc1: [0.6, 0.95], bc2: [0.4, 0.95],
-  lc1: [0.05, 0.6], lc2: [0.05, 0.4]
+  lc1: [0.04, 0.6], lc2: [0.04, 0.4]
 };
 
 const S5: ShapeDef = {
-  tl: [0.05, 0.05], tr: [0.95, 0.02], br: [0.95, 0.95], bl: [0.05, 0.98],
+  tl: [0.02, 0.05], tr: [0.95, 0.02], br: [0.95, 0.95], bl: [0.02, 0.98],
   tc1: [0.3, 0.12], tc2: [0.7, 0.12],
   rc1: [0.8, 0.4], rc2: [0.8, 0.6],
   bc1: [0.7, 1.0], bc2: [0.3, 1.0],
@@ -119,7 +119,7 @@ const paths = [
   buildPath(S3, 0.05),
   buildPath(S4, 0.05),
   buildPath(S5, 0.03),
-  buildPath(S6, 0.03),
+  buildPath(S6, 0.00),
 ];
 
 export default function ScrollVideoReveal({
@@ -162,6 +162,10 @@ export default function ScrollVideoReveal({
   const childrenOpacity = useTransform(progress, [0.55, 0.8], [1, 0])
   const overlayOpacity = useTransform(progress, [0.85, 1], [0, 1])
   const overlayScale = useTransform(progress, [0.85, 1], [0.92, 1])
+
+  // Align the clip container's left edge with the hero's md:px-10 (40px) at the
+  // start of the reveal, then ease to 0 as the path expands to full-bleed (S5/S6).
+  const clipLeft = useTransform(progress, [0, 0.6, 1], [40, 40, 0])
 
   if (isMobile) {
     return (

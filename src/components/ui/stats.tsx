@@ -38,7 +38,7 @@ export default function Stats() {
   const inView = useInView(ref, { once: true, margin: "-15%" })
 
   return (
-    <section className="px-6 py-10 md:px-8 md:py-16">
+    <section className="px-4 py-10 md:px-10 md:py-16">
       <div
         ref={ref}
         className="grid grid-cols-2 gap-y-12 md:flex md:flex-row md:justify-between md:gap-y-0"
